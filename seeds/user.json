@@ -1,20 +1,32 @@
 [
 	{
-		"id": "2240b95c-9c71-41e7-8f5b-59d4c2b9215c",
 		"name": "Alex Johnson",
 		"email": "alex.j@example.com",
-		"password": "hashed_password_1",
-		"profileImage": "https://example.com/images/alex.jpg",
-		"createdAt": "2025-11-01T10:00:00Z",
-		"updatedAt": "2025-11-01T10:00:00Z"
+		"password": "hashedpass1",
+		"profileImage": "http://example.com/images/alex.jpg"
 	},
 	{
-		"id": "a1c5d8e7-f3b1-4a90-8e2c-74a9d0c61b4f",
-		"name": "Maria Garcia",
-		"email": "maria.g@example.com",
-		"password": "hashed_password_2",
-		"profileImage": "https://example.com/images/maria.jpg",
-		"createdAt": "2025-11-02T11:30:00Z",
-		"updatedAt": "2025-11-02T11:30:00Z"
+		"name": "Sarah Miller",
+		"email": "sarah.m@example.com",
+		"password": "hashedpass2",
+		"profileImage": "http://example.com/images/sarah.jpg"
+	},
+	{
+		"name": "Chris Lee",
+		"email": "chris.l@example.com",
+		"password": "hashedpass3",
+		"profileImage": null
+	},
+	{
+		"name": "Emily Chen",
+		"email": "emily.c@example.com",
+		"password": "hashedpass4",
+		"profileImage": "http://example.com/images/emily.jpg"
+	},
+	{
+		"name": "Jordan Hayes",
+		"email": "jordan.h@example.com",
+		"password": "hashedpass5",
+		"profileImage": null
 	}
 ]

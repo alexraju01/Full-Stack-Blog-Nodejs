@@ -1,44 +1,137 @@
 [
-  {
-    "id": "e4f8a3c1-0d2b-4e6f-9a1c-7b4d3e0f2a9c",
-    "userId": "2240b95c-9c71-41e7-8f5b-59d4c2b9215c", 
-    "slug": "getting-started-with-sequelize",
-    "title": "Getting Started with Sequelize ORM",
-    "content": "Sequelize makes database interaction simple and enjoyable. We cover models, associations, and migrations in this introductory post.",
-    "imageUrl": "https://example.com/images/sequelize.png",
-    "category": "Programming",
-    "tags": ["Node.js", "Sequelize", "Database"],
-    "isPublished": true,
-    "publishedAt": "2025-11-05T15:30:00Z",
-    "createdAt": "2025-11-04T10:00:00Z",
-    "updatedAt": "2025-11-05T15:30:00Z"
-  },
-  {
-    "id": "3b2d1c9a-5e8f-47b2-a0c1-6f5e4d3c2b1a",
-    "userId": "a1c5d8e7-f3b1-4a90-8e2c-74a9d0c61b4f",
-    "slug": "top-5-travel-destinations-2026",
-    "title": "Top 5 Budget Travel Destinations for 2026",
-    "content": "From Southeast Asia to South America, here are five breathtaking locations that won't break your bank.",
-    "imageUrl": "https://example.com/images/travel.png",
-    "category": "Travel",
-    "tags": ["Budget", "Vacation", "Asia"],
-    "isPublished": true,
-    "publishedAt": "2025-11-06T09:00:00Z",
-    "createdAt": "2025-11-06T08:00:00Z",
-    "updatedAt": "2025-11-06T09:00:00Z"
-  },
-  {
-    "id": "7d9e6f0b-4c3a-4e2d-8f1c-5a6b7c8d9e0f",
-    "userId": "2240b95c-9c71-41e7-8f5b-59d4c2b9215c",
-    "slug": "draft-post-future-tech",
-    "title": "The Future of AI in Web Development",
-    "content": "A detailed look at how large language models are changing front-end workflows.",
-    "imageUrl": null,
-    "category": "Technology",
-    "tags": ["AI", "WebDev"],
-    "isPublished": false,
-    "publishedAt": null,
-    "createdAt": "2025-11-07T05:00:00Z",
-    "updatedAt": "2025-11-07T05:00:00Z"
-  }
+	{
+		"slug": "getting-started-with-node-js",
+		"title": "A Beginner's Guide to Node.js Development",
+		"content": "Node.js is a powerful JavaScript runtime. This post covers the basics of setting up your first project...",
+		"imageUrl": "http://example.com/blog/node-js.png",
+		"category": "Technology",
+		"tags": ["nodejs", "javascript", "backend"],
+		"userId": 1
+	},
+	{
+		"slug": "mastering-sequelize-migrations",
+		"title": "Mastering Sequelize Migrations for Database Schema Changes",
+		"content": "Migrations are essential for evolving your database schema safely in production environments.",
+		"imageUrl": null,
+		"category": "Database",
+		"tags": ["sequelize", "orm", "database"],
+		"userId": 1
+	},
+	{
+		"slug": "css-grid-vs-flexbox-deep-dive",
+		"title": "CSS Grid vs. Flexbox: A Deep Dive Comparison",
+		"content": "Understanding when to use Grid and when to use Flexbox is key to modern web layout design.",
+		"imageUrl": "http://example.com/blog/css-layout.jpg",
+		"category": "Frontend",
+		"tags": ["css", "frontend", "webdesign"],
+		"userId": 1
+	},
+	{
+		"slug": "the-rise-of-serverless-architecture",
+		"title": "The Rise of Serverless Architecture in 2024",
+		"content": "Serverless computing offers scalability and reduced operational overhead. We explore its pros and cons.",
+		"imageUrl": null,
+		"category": "Cloud",
+		"tags": ["aws", "serverless", "cloud"],
+		"userId": 1
+	},
+	{
+		"slug": "react-hooks-best-practices",
+		"title": "React Hooks: Best Practices and Advanced Usage",
+		"content": "Go beyond useState and useEffect. Learn how to create performant custom hooks.",
+		"imageUrl": "http://example.com/blog/react-hooks.jpg",
+		"category": "Frontend",
+		"tags": ["react", "javascript", "hooks"],
+		"userId": 1
+	},
+	{
+		"slug": "understanding-jwt-authentication",
+		"title": "Security 101: Understanding JWT Authentication",
+		"content": "JSON Web Tokens are a popular way to secure APIs. Here is how they work.",
+		"imageUrl": null,
+		"category": "Security",
+		"tags": ["jwt", "authentication", "security"],
+		"userId": 2
+	},
+	{
+		"slug": "tips-for-remote-work-productivity",
+		"title": "10 Tips for Maintaining Productivity While Working Remotely",
+		"content": "Strategies for setting up a distraction-free home office and managing your schedule.",
+		"imageUrl": "http://example.com/blog/remote-work.jpg",
+		"category": "Lifestyle",
+		"tags": ["work", "remote", "productivity"],
+		"userId": 2
+	},
+	{
+		"slug": "design-patterns-in-javascript",
+		"title": "Common Design Patterns Every JavaScript Developer Should Know",
+		"content": "From the Factory to the Observer pattern, these concepts improve code structure.",
+		"imageUrl": null,
+		"category": "Technology",
+		"tags": ["javascript", "patterns", "software-design"],
+		"userId": 2
+	},
+	{
+		"slug": "why-you-should-learn-typescript",
+		"title": "The Case for Adopting TypeScript in Your Next Project",
+		"content": "TypeScript adds static typing to JavaScript, catching errors before runtime.",
+		"imageUrl": "http://example.com/blog/typescript.png",
+		"category": "Technology",
+		"tags": ["typescript", "javascript", "frontend"],
+		"userId": 3
+	},
+	{
+		"slug": "improving-api-performance-with-caching",
+		"title": "How to Improve API Performance with Redis Caching",
+		"content": "Caching is one of the most effective ways to reduce database load and latency.",
+		"imageUrl": null,
+		"category": "Backend",
+		"tags": ["redis", "caching", "api"],
+		"userId": 3
+	},
+	{
+		"slug": "a-review-of-the-latest-macbook-pro",
+		"title": "Hardware Review: The New M3 MacBook Pro for Developers",
+		"content": "A detailed look at the performance benchmarks and battery life for coding tasks.",
+		"imageUrl": "http://example.com/blog/macbook.jpg",
+		"category": "Hardware",
+		"tags": ["review", "mac", "hardware"],
+		"userId": 3
+	},
+	{
+		"slug": "introduction-to-python-data-science",
+		"title": "Introduction to Data Science using Python and Pandas",
+		"content": "Start your journey in data analysis with the powerful Pandas library.",
+		"imageUrl": "http://example.com/blog/pandas.jpg",
+		"category": "Data Science",
+		"tags": ["python", "data-science", "pandas"],
+		"userId": 4
+	},
+	{
+		"slug": "setting-up-docker-for-local-development",
+		"title": "Efficient Local Development with Docker Compose",
+		"content": "Containerization simplifies dependency management and ensures environment consistency.",
+		"imageUrl": null,
+		"category": "DevOps",
+		"tags": ["docker", "devops", "containers"],
+		"userId": 4
+	},
+	{
+		"slug": "explore-the-world-of-functional-programming",
+		"title": "Exploring Functional Programming Paradigms",
+		"content": "An overview of concepts like immutability, pure functions, and higher-order functions.",
+		"imageUrl": null,
+		"category": "Technology",
+		"tags": ["programming", "functional", "theory"],
+		"userId": 5
+	},
+	{
+		"slug": "writing-clean-and-maintainable-code",
+		"title": "Clean Code Principles for Modern Software Engineers",
+		"content": "Best practices for variable naming, function size, and reducing complexity.",
+		"imageUrl": "http://example.com/blog/clean-code.png",
+		"category": "Software Engineering",
+		"tags": ["clean-code", "best-practices", "refactoring"],
+		"userId": 5
+	}
 ]

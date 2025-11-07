@@ -3,6 +3,11 @@ require("dotenv").config();
 const app = require("./app");
 const sequelize = require("./config/db");
 
+require("./models/userModel");
+require("./models/blogModel");
+
+const seedDatabase = require("./seeds/seed");
+
 const startServer = async () => {
 	try {
 		console.log("Connecting to the database...");
@@ -10,9 +15,11 @@ const startServer = async () => {
 		await sequelize.authenticate();
 		console.log("Database connected successfully!");
 
-		// Sync models (optional)
-		// await sequelize.sync();
-		// console.log("Models synchronized.");
+		await sequelize.sync({ force: true });
+		console.log("Models synchronized.");
+
+		seedDatabase();
+		console.log("Models seeded!");
 
 		const { PORT } = process.env;
 		app.listen(PORT, () => {
