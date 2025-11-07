@@ -1,0 +1,27 @@
+{
+	"name": "full-stack-blog-nodejs",
+	"version": "1.0.0",
+	"description": "",
+	"homepage": "https://github.com/alexraju01/Full-Stack-Blog-Nodejs#readme",
+	"bugs": {
+		"url": "https://github.com/alexraju01/Full-Stack-Blog-Nodejs/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/alexraju01/Full-Stack-Blog-Nodejs.git"
+	},
+	"license": "ISC",
+	"author": "Alex Raju",
+	"type": "commonjs",
+	"main": "server.js",
+	"scripts": {
+		"start": "nodemon server.js"
+	},
+	"dependencies": {
+		"cors": "^2.8.5",
+		"dotenv": "^17.2.3",
+		"express": "^5.1.0",
+		"morgan": "^1.10.1",
+		"nodemon": "^3.1.10"
+	}
+}
