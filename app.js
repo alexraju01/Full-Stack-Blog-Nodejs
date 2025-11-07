@@ -21,9 +21,4 @@ app.get("/*splat", async (req, res, next) => {
 	next(new AppError(`can't find the ${req.originalUrl} on the this server`));
 });
 
-const { PORT } = process.env;
-app.listen(PORT, () => {
-	console.log(` Server is running at http://localhost:${PORT}`);
-});
-
-// module.exports = app;
+module.exports = app;
