@@ -1,0 +1,20 @@
+[
+	{
+		"id": "2240b95c-9c71-41e7-8f5b-59d4c2b9215c",
+		"name": "Alex Johnson",
+		"email": "alex.j@example.com",
+		"password": "hashed_password_1",
+		"profileImage": "https://example.com/images/alex.jpg",
+		"createdAt": "2025-11-01T10:00:00Z",
+		"updatedAt": "2025-11-01T10:00:00Z"
+	},
+	{
+		"id": "a1c5d8e7-f3b1-4a90-8e2c-74a9d0c61b4f",
+		"name": "Maria Garcia",
+		"email": "maria.g@example.com",
+		"password": "hashed_password_2",
+		"profileImage": "https://example.com/images/maria.jpg",
+		"createdAt": "2025-11-02T11:30:00Z",
+		"updatedAt": "2025-11-02T11:30:00Z"
+	}
+]

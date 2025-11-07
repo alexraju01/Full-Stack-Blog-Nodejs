@@ -1,0 +1,44 @@
+[
+  {
+    "id": "e4f8a3c1-0d2b-4e6f-9a1c-7b4d3e0f2a9c",
+    "userId": "2240b95c-9c71-41e7-8f5b-59d4c2b9215c", 
+    "slug": "getting-started-with-sequelize",
+    "title": "Getting Started with Sequelize ORM",
+    "content": "Sequelize makes database interaction simple and enjoyable. We cover models, associations, and migrations in this introductory post.",
+    "imageUrl": "https://example.com/images/sequelize.png",
+    "category": "Programming",
+    "tags": ["Node.js", "Sequelize", "Database"],
+    "isPublished": true,
+    "publishedAt": "2025-11-05T15:30:00Z",
+    "createdAt": "2025-11-04T10:00:00Z",
+    "updatedAt": "2025-11-05T15:30:00Z"
+  },
+  {
+    "id": "3b2d1c9a-5e8f-47b2-a0c1-6f5e4d3c2b1a",
+    "userId": "a1c5d8e7-f3b1-4a90-8e2c-74a9d0c61b4f",
+    "slug": "top-5-travel-destinations-2026",
+    "title": "Top 5 Budget Travel Destinations for 2026",
+    "content": "From Southeast Asia to South America, here are five breathtaking locations that won't break your bank.",
+    "imageUrl": "https://example.com/images/travel.png",
+    "category": "Travel",
+    "tags": ["Budget", "Vacation", "Asia"],
+    "isPublished": true,
+    "publishedAt": "2025-11-06T09:00:00Z",
+    "createdAt": "2025-11-06T08:00:00Z",
+    "updatedAt": "2025-11-06T09:00:00Z"
+  },
+  {
+    "id": "7d9e6f0b-4c3a-4e2d-8f1c-5a6b7c8d9e0f",
+    "userId": "2240b95c-9c71-41e7-8f5b-59d4c2b9215c",
+    "slug": "draft-post-future-tech",
+    "title": "The Future of AI in Web Development",
+    "content": "A detailed look at how large language models are changing front-end workflows.",
+    "imageUrl": null,
+    "category": "Technology",
+    "tags": ["AI", "WebDev"],
+    "isPublished": false,
+    "publishedAt": null,
+    "createdAt": "2025-11-07T05:00:00Z",
+    "updatedAt": "2025-11-07T05:00:00Z"
+  }
+]
