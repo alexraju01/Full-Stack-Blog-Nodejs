@@ -3,6 +3,8 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const cors = require("cors");
+const blogRouter = require("./routes/blogRoutes");
+const AppError = require("./utility/AppError");
 
 // MIDDLEWARE
 app.use(express.json());
@@ -14,7 +16,7 @@ if (process.env.NODE_ENV === "development") {
 	app.use(morgan("dev"));
 }
 
-// app.use("/api/v1/blog", blogRouter);
+app.use("/api/v1/blogs", blogRouter);
 
 // Catches all undefined routes
 app.get("/*splat", async (req, res, next) => {

@@ -18,7 +18,7 @@ const startServer = async () => {
 		await sequelize.sync({ force: true });
 		console.log("Models synchronized.");
 
-		seedDatabase();
+		await seedDatabase();
 		console.log("Models seeded!");
 
 		const { PORT } = process.env;
@@ -28,7 +28,7 @@ const startServer = async () => {
 	} catch (error) {
 		console.error("Database connection failed!");
 		console.error("Error details:", error.message);
-		process.exit(1); // Stop the app if the DB connection fails
+		// process.exit(1); // Stop the app if the DB connection fails
 	}
 };
 

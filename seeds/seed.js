@@ -9,7 +9,6 @@ const seedDatabase = async () => {
 	await User.bulkCreate(userData);
 	await Blog.bulkCreate(blogData);
 	console.log("Blogs seed successfully!");
-	process.exit(0);
 };
 
 module.exports = seedDatabase;
