@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/db");
+const User = require("./userModel");
 
 const Blog = sequelize.define(
 	"Blog",
@@ -8,6 +9,12 @@ const Blog = sequelize.define(
 			type: DataTypes.UUID,
 			defaultValue: DataTypes.UUIDV4,
 			primaryKey: true,
+		},
+
+		slug: {
+			type: DataTypes.STRING,
+			unique: true,
+			allowNull: false,
 		},
 
 		title: {
@@ -25,14 +32,10 @@ const Blog = sequelize.define(
 			allowNull: true, // optional, in case it's a text-only blog
 		},
 
-		userName: {
-			type: DataTypes.STRING,
-			allowNull: false,
-		},
-
+		// The Foreign Key
 		userId: {
 			type: DataTypes.UUID,
-			allowNull: false,
+			allowNull: false, // Ensures every blog post has an author
 		},
 
 		category: {
@@ -59,5 +62,9 @@ const Blog = sequelize.define(
 		timestamps: true, // adds createdAt and updatedAt
 	}
 );
+
+// Establishing Relationships
+User.hasMany(Blog, { foreignKey: "userId", as: "posts" });
+Blog.belongsTo(User, { foreignKey: "userId", as: "author" });
 
 module.exports = Blog;
