@@ -15,7 +15,8 @@
 	"type": "commonjs",
 	"main": "server.js",
 	"scripts": {
-		"start": "nodemon server.js"
+		"start": "nodemon server.js",
+		"start:prod": "SET NODE_ENV=production&&nodemon server.js"
 	},
 	"dependencies": {
 		"cors": "^2.8.5",

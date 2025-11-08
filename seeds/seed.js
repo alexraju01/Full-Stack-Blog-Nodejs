@@ -7,8 +7,12 @@ const userData = require("./user.json");
 const seedDatabase = async () => {
 	await sequelize.sync({ force: true });
 	await User.bulkCreate(userData);
+	console.log("Users seed successfully!");
 	await Blog.bulkCreate(blogData);
 	console.log("Blogs seed successfully!");
 };
 
-module.exports = seedDatabase;
+seedDatabase();
+
+// Command to run this seed file
+// node seeds/seed.js
