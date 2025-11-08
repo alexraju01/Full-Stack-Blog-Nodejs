@@ -4,4 +4,10 @@ const blogController = require("../controllers/blogController");
 
 router.route("/").get(blogController.getAllBlogs).post(blogController.createBlog);
 
+router
+	.route("/:id")
+	.get(blogController.GetOneBlog)
+	.delete(blogController.deleteBlog)
+	.patch(blogController.updateBlog);
+
 module.exports = router;
