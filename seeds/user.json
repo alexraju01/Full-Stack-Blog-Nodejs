@@ -2,31 +2,36 @@
 	{
 		"name": "Alex Johnson",
 		"email": "alex.j@example.com",
-		"password": "hashedpass1",
+		"password": "strongpassword1",
+		"confirmPassword": "strongpassword1",
 		"profileImage": "http://example.com/images/alex.jpg"
 	},
 	{
 		"name": "Sarah Miller",
 		"email": "sarah.m@example.com",
-		"password": "hashedpass2",
+		"password": "securepass2",
+		"confirmPassword": "securepass2",
 		"profileImage": "http://example.com/images/sarah.jpg"
 	},
 	{
 		"name": "Chris Lee",
 		"email": "chris.l@example.com",
-		"password": "hashedpass3",
+		"password": "longpass33",
+		"confirmPassword": "longpass33",
 		"profileImage": null
 	},
 	{
 		"name": "Emily Chen",
 		"email": "emily.c@example.com",
-		"password": "hashedpass4",
+		"password": "safeandstrong4",
+		"confirmPassword": "safeandstrong4",
 		"profileImage": "http://example.com/images/emily.jpg"
 	},
 	{
 		"name": "Jordan Hayes",
 		"email": "jordan.h@example.com",
-		"password": "hashedpass5",
+		"password": "mysecretpass5",
+		"confirmPassword": "mysecretpass5",
 		"profileImage": null
 	}
 ]
