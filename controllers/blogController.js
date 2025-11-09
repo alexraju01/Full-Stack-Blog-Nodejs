@@ -2,7 +2,13 @@ const Blog = require("../models/blogModel");
 const AppError = require("../utility/AppError");
 
 exports.getAllBlogs = async (req, res) => {
-	const blogs = await Blog.findAll();
+	const filter = { ...req.query };
+	const excludedFields = ["page", "sort", "limit", "fields"];
+	excludedFields.forEach((element) => delete filter[element]);
+
+	console.log("hellloo:", req.query, filter);
+
+	const blogs = await Blog.findAll({ where: filter });
 	res.status(200).json({
 		status: "successs",
 		results: blogs.length,
