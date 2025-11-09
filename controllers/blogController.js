@@ -3,7 +3,7 @@ const APIFeatures = require("../utility/APIFeatures");
 const AppError = require("../utility/AppError");
 
 exports.getAllBlogs = async (req, res) => {
-	const features = new APIFeatures(Blog.findAndCountAll(), req.query).filter();
+	const features = new APIFeatures(Blog.findAndCountAll(), req.query).filter().sort();
 	const { count, rows: blogs } = await features.query;
 
 	res.status(200).json({
