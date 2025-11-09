@@ -4,6 +4,8 @@ const app = express();
 const morgan = require("morgan");
 const cors = require("cors");
 const blogRouter = require("./routes/blogRoutes");
+const userRouter = require("./routes/userRoutes");
+
 const AppError = require("./utility/AppError");
 const globalErrorHandler = require("./controllers/errorController");
 
@@ -18,6 +20,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 app.use("/api/v1/blogs", blogRouter);
+app.use("/api/v1/users", userRouter);
 
 // Catches all undefined routes
 app.get("/*splat", async (req, res, next) => {
