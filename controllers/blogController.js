@@ -1,17 +1,14 @@
 const Blog = require("../models/blogModel");
+const APIFeatures = require("../utility/APIFeatures");
 const AppError = require("../utility/AppError");
 
 exports.getAllBlogs = async (req, res) => {
-	const filter = { ...req.query };
-	const excludedFields = ["page", "sort", "limit", "fields"];
-	excludedFields.forEach((element) => delete filter[element]);
+	const features = new APIFeatures(Blog.findAndCountAll(), req.query).filter();
+	const { count, rows: blogs } = await features.query;
 
-	console.log("hellloo:", req.query, filter);
-
-	const blogs = await Blog.findAll({ where: filter });
 	res.status(200).json({
 		status: "successs",
-		results: blogs.length,
+		results: count,
 		data: blogs,
 	});
 };
