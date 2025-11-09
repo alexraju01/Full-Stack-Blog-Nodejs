@@ -38,7 +38,6 @@ exports.deleteBlog = async (req, res, next) => {
 			id,
 		},
 	});
-	console.log("deleted:", deleteBlog);
 	if (deleteBlog === 0) return next(new AppError("No blog found with that id", 404));
 
 	res.status(204).json({

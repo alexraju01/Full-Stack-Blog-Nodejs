@@ -20,7 +20,12 @@ const User = sequelize.define(
 			allowNull: false,
 			unique: true,
 			validate: {
-				isEmail: true,
+				notEmpty: {
+					msg: "The email field cannot be empty",
+				},
+				isEmail: {
+					msg: "The email format is invalid. Please try again.",
+				},
 			},
 		},
 
@@ -28,6 +33,9 @@ const User = sequelize.define(
 			type: DataTypes.STRING,
 			allowNull: false,
 			validate: {
+				notEmpty: {
+					msg: "The password field cannot be empty",
+				},
 				len: {
 					args: [8],
 					msg: "Password must be at least 8 characters long.",

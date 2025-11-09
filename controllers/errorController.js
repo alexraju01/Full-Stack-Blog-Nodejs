@@ -10,7 +10,7 @@ const handleSequelizeValidationErrorDB = (err) => {
 
 const handleSequelizeUniqueConstraintErrorDB = (err) => {
 	const fields = Object.keys(err.fields || {});
-	const message = `Duplicate field value: ${fields.join(", ")}. Please use another value.`;
+	const message = `Duplicate field value: ${fields.join(", ")} Please use another value.`;
 	return new AppError(message, 400);
 };
 
