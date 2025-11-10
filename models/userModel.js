@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/db");
-
+const bcrypt = require("bcryptjs");
 const User = sequelize.define(
 	"User",
 	{
@@ -72,5 +72,17 @@ const User = sequelize.define(
 		},
 	}
 );
+// Hook to hash the password before a new user is created.
+User.beforeCreate(async (user, options) => {
+	user.password = await bcrypt.hash(user.password, 12);
+	user.confirmPassword = undefined;
+});
+
+// Hook to hash the password only if it has been changed before an existing user is updated.
+User.beforeUpdate(async (user, options) => {
+	if (!user.changed("password")) return next();
+	user.password = await bcrypt.hash(user.password, 12);
+	user.confirmPassword = undefined;
+});
 
 module.exports = User;
