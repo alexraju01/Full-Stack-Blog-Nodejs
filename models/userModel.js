@@ -62,6 +62,20 @@ const User = sequelize.define(
 		},
 	},
 	{
+		defaultScope: {
+			attributes: {
+				exclude: ["password", "confirmPassword"],
+			},
+		},
+
+		scopes: {
+			withPasswords: {
+				attributes: {
+					include: ["password"],
+				},
+			},
+		},
+
 		validate: {
 			passwordMatches() {
 				if (this.password !== this.confirmPassword) {
@@ -84,5 +98,9 @@ User.beforeUpdate(async (user, options) => {
 	user.password = await bcrypt.hash(user.password, 12);
 	user.confirmPassword = undefined;
 });
+
+User.prototype.correctPassword = async function (candidatePassword, userPassword) {
+	return await bcrypt.compare(candidatePassword, userPassword);
+};
 
 module.exports = User;
