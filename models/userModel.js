@@ -56,6 +56,10 @@ const User = sequelize.define(
 			},
 		},
 
+		passwordChangedAt: {
+			type: DataTypes.DATE,
+		},
+
 		profileImage: {
 			type: DataTypes.STRING,
 			allowNull: true,
@@ -97,10 +101,23 @@ User.beforeUpdate(async (user, options) => {
 	if (!user.changed("password")) return next();
 	user.password = await bcrypt.hash(user.password, 12);
 	user.confirmPassword = undefined;
+
+	user.passwordChangedAt = Date.now();
 });
 
 User.prototype.correctPassword = async function (candidatePassword, userPassword) {
 	return await bcrypt.compare(candidatePassword, userPassword);
+};
+
+User.prototype.changedPasswordAfter = function (JWTTimestamp) {
+	if (this.passwordChangedAt) {
+		const changedTimestamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
+		console.log(changedTimestamp, JWTTimestamp);
+
+		return JWTTimestamp < changedTimestamp;
+	}
+
+	return false;
 };
 
 module.exports = User;

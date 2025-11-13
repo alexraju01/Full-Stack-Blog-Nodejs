@@ -14,6 +14,11 @@ const handleSequelizeUniqueConstraintErrorDB = (err) => {
 	return new AppError(message, 400);
 };
 
+const handleJWTError = () => new AppError("Invalid Token. Please login again! ", 401);
+
+const TokenExpiredError = () =>
+	new AppError("Your token has be expired! Please login in again.", 401);
+
 const sendErrorDev = (err, res) => {
 	res.status(err.statusCode || 500).json({
 		status: err.status,
@@ -53,6 +58,8 @@ module.exports = (err, req, res, next) => {
 
 		if (error.name === "SequelizeValidationError") error = handleSequelizeValidationErrorDB(error);
 
+		if (error.name === "JsonWebTokenError") error = handleJWTError();
+		if (error.name === "TokenExpiredError") error = TokenExpiredError();
 		sendErrorProd(error, res);
 	}
 };

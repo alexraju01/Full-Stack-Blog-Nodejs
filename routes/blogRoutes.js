@@ -1,13 +1,18 @@
 const express = require("express");
-const router = express.Router();
 const blogController = require("../controllers/blogController");
+const authController = require("../controllers/authController");
 
-router.route("/").get(blogController.getAllBlogs).post(blogController.createBlog);
+const router = express.Router();
+
+router
+	.route("/")
+	.get(authController.protect, blogController.getAllBlogs)
+	.post(blogController.createBlog);
 
 router
 	.route("/:id")
 	.get(blogController.GetOneBlog)
-	.delete(blogController.deleteBlog)
+	.delete(authController.protect, blogController.deleteBlog)
 	.patch(blogController.updateBlog);
 
 module.exports = router;

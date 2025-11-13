@@ -14,6 +14,11 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static("public"));
 
+app.use((req, res, next) => {
+	// console.log("App headers:", req.headers);
+	next();
+});
+
 // Development Logging
 if (process.env.NODE_ENV === "development") {
 	app.use(morgan("dev"));
