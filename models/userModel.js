@@ -1,4 +1,4 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes, ENUM } = require("sequelize");
 const sequelize = require("../config/db");
 const bcrypt = require("bcryptjs");
 const User = sequelize.define(

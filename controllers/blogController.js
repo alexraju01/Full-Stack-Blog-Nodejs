@@ -14,11 +14,14 @@ exports.getAllBlogs = async (req, res) => {
 };
 
 exports.createBlog = async (req, res) => {
-	const blog = await Blog.create(req.body);
+	const blogData = req.body;
+	blogData.userId = req.user.id;
+
+	const newBlog = await Blog.create(blogData);
 
 	res.status(201).json({
 		status: "success",
-		data: blog,
+		data: newBlog,
 	});
 };
 
@@ -33,12 +36,19 @@ exports.GetOneBlog = async (req, res, next) => {
 
 exports.deleteBlog = async (req, res, next) => {
 	const { id } = req.params;
+	const { id: userId } = req.user;
+
 	const deleteBlog = await Blog.destroy({
 		where: {
 			id,
+			userId,
 		},
 	});
-	if (deleteBlog === 0) return next(new AppError("No blog found with that id", 404));
+
+	if (deleteBlog === 0)
+		return next(
+			new AppError("You do not have permission to delete this blog, or it does not exist.", 403)
+		);
 
 	res.status(204).json({
 		status: "success",
@@ -49,16 +59,19 @@ exports.deleteBlog = async (req, res, next) => {
 exports.updateBlog = async (req, res, next) => {
 	const { id } = req.params;
 	const updateData = req.body;
+	const userId = req.user.id;
 
 	const [affectedRows] = await Blog.update(updateData, {
 		where: {
 			id: id,
+			userId,
 		},
 	});
-	console.log("data:", affectedRows);
 
 	if (affectedRows === 0) {
-		return next(new AppError("No blog found with that id", 404));
+		return next(
+			new AppError("You do not have permission to update this blog, or it does not exist.", 403)
+		);
 	}
 
 	const updatedBlog = await Blog.findByPk(id);
