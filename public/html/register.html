@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Register - Modern Blog</title>
+
+		<link rel="stylesheet" href="../css/styles.css" />
+
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap"
+			rel="stylesheet" />
+	</head>
+	<body>
+		<div class="register-container">
+			<div class="register-form">
+				<h2 style="text-align: center; font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem">
+					Create Your Account
+				</h2>
+
+				<form class="space-y-4">
+					<div class="form-group">
+						<label
+							style="
+								display: block;
+								margin-bottom: 0.5rem;
+								font-weight: 500;
+								color: var(--text-secondary);
+								font-size: 0.875rem;
+							"
+							for="name"
+							>Name</label
+						>
+						<input type="text" id="name" placeholder="Your Name" required />
+					</div>
+
+					<div class="form-group">
+						<label
+							style="
+								display: block;
+								margin-bottom: 0.5rem;
+								font-weight: 500;
+								color: var(--text-secondary);
+								font-size: 0.875rem;
+							"
+							for="email"
+							>Email</label
+						>
+						<input type="email" id="email" placeholder="Your Email" required />
+					</div>
+
+					<div class="form-group">
+						<label
+							style="
+								display: block;
+								margin-bottom: 0.5rem;
+								font-weight: 500;
+								color: var(--text-secondary);
+								font-size: 0.875rem;
+							"
+							for="password"
+							>Password</label
+						>
+						<input type="password" id="password" placeholder="Password" required />
+					</div>
+
+					<button type="submit" class="btn" style="width: 100%; margin-top: 1rem">Register</button>
+				</form>
+
+				<p
+					style="
+						text-align: center;
+						margin-top: 1.5rem;
+						font-size: 0.875rem;
+						color: var(--text-secondary);
+					">
+					Already have an account?
+					<a href="./login.html" style="color: var(--primary-color); font-weight: 600">Login</a>
+				</p>
+			</div>
+		</div>
+	</body>
+</html>
