@@ -1,9 +1,11 @@
-export const signUpUser = async () => {
+import { fetchData } from "./baseApi.js";
+
+export const signupUser = async (newUser) => {
 	try {
-		const signUp = await fetchData("POST", null, "users/signup");
+		const signUp = await fetchData("POST", newUser, "users/signup");
 		return signUp;
 	} catch (error) {
 		console.error("Failed to signup user.", error);
-		return [];
+		throw error;
 	}
 };
