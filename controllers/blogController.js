@@ -1,10 +1,22 @@
 const Blog = require("../models/blogModel");
+const User = require("../models/userModel");
 const APIFeatures = require("../utility/APIFeatures");
 const AppError = require("../utility/AppError");
 
 exports.getAllBlogs = async (req, res) => {
 	const features = new APIFeatures(Blog.findAndCountAll(), req.query).filter().sort();
-	const { count, rows: blogs } = await features.query;
+
+	const { count, rows: blogs } = await Blog.findAndCountAll({
+		...features.options,
+		attributes: { exclude: ["userId"] }, // remove userId
+		include: [
+			{
+				model: User,
+				as: "author",
+				attributes: ["id", "name"],
+			},
+		],
+	});
 
 	res.status(200).json({
 		status: "successs",
@@ -12,7 +24,6 @@ exports.getAllBlogs = async (req, res) => {
 		data: blogs,
 	});
 };
-
 exports.createBlog = async (req, res) => {
 	const blogData = req.body;
 	blogData.userId = req.user.id;
