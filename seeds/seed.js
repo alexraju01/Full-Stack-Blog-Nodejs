@@ -31,7 +31,7 @@ const seedDatabase = async () => {
 		console.log("Passwords hashed successfully!");
 
 		// 3. Seed Users
-		await User.bulkCreate(hashedUserData); // Use the data with HASHED passwords
+		await User.bulkCreate(userData, { individualHooks: true }); // Use the data with HASHED passwords
 		console.log("Seeded users successfully! ✅");
 
 		// 4. Seed Blogs

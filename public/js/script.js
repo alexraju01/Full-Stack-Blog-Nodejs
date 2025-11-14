@@ -29,10 +29,8 @@ const renderBlogsToHTML = (blogs) => {
 };
 
 const SignupUser = () => {
-	console.log("SignUpUser initialized");
 	const form = document.getElementById("signup-form");
 	if (!form) return;
-	console.log("sdfgsdfg");
 	form.addEventListener("submit", handleSignUp);
 };
 
@@ -46,22 +44,14 @@ const handleSignUp = async (event) => {
 	console.log("Form Data Object (Values):", userData);
 	const { name, email, password, confirmPassword } = userData;
 
-	if (password !== confirmPassword) {
-		const message = "Passwords do not match.";
-		console.error("Validation Failed:", message);
-		displayMessage(form, message, "error"); // Use 'form' and 'error' type
-		return;
-	}
 	try {
 		const newUserPayload = { name, email, password, confirmPassword };
-		const result = await signupUser(newUserPayload);
-		console.log("Sign up successful! Response:", result);
+		await signupUser(newUserPayload);
+		displayMessage(form, "Registration successful! You can now log in.", "success");
+		window.location.href = "/";
 	} catch (error) {
 		console.error("Error during sign up:", error);
-		// Use the error message from the thrown Error object
 		const feedback = error.message || "An unexpected error occurred. Please try again.";
-
-		// Use the 'form' element and 'error' type
 		displayMessage(form, feedback, "error");
 	}
 };
