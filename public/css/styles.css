@@ -70,8 +70,17 @@ a:hover {
 	color: var(--text-primary);
 }
 
-.main-nav a {
-	margin-left: 1rem;
+.nav-main-link {
+	font-weight: 600;
+	color: var(--text-primary);
+}
+
+#nav-user-status {
+	display: flex;
+	gap: 1rem;
+}
+
+#nav-user-status a {
 	font-weight: 600;
 }
 
