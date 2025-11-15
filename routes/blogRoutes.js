@@ -9,6 +9,8 @@ router
 	.get(blogController.getAllBlogs)
 	.post(authController.protect, blogController.createBlog);
 
+router.get("/my-blogs", authController.protect, blogController.getUsersBlogs);
+
 router
 	.route("/:id")
 	.get(blogController.GetOneBlog)

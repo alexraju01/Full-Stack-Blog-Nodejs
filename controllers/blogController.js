@@ -103,3 +103,32 @@ exports.updateBlog = async (req, res, next) => {
 		blog: updatedBlog,
 	});
 };
+exports.getUsersBlogs = async (req, res) => {
+	const userId = req.user.id;
+
+	const features = new APIFeatures(Blog.findAndCountAll({ where: { userId } }), req.query)
+		.filter()
+		.sort();
+
+	const { count, rows: blogs } = await Blog.findAndCountAll({
+		...features.options,
+		where: {
+			...features.options.where,
+			userId: userId,
+		},
+		attributes: { exclude: ["userId"] },
+		include: [
+			{
+				model: User,
+				as: "author",
+				attributes: ["id", "name"],
+			},
+		],
+	});
+
+	res.status(200).json({
+		status: "success",
+		results: count,
+		data: blogs,
+	});
+};
