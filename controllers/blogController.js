@@ -38,8 +38,16 @@ exports.createBlog = async (req, res) => {
 
 exports.GetOneBlog = async (req, res, next) => {
 	const { id } = req.params;
-	const blog = await Blog.findByPk(id);
-
+	const blog = await Blog.findByPk(id, {
+		attributes: { exclude: ["userId"] }, // Optional: Exclude the foreign key from the main blog object
+		include: [
+			{
+				model: User,
+				as: "author", // Must match the alias defined in your association (Blog.belongsTo(User, { as: 'author' }))
+				attributes: ["id", "name"], // Only select the necessary fields from the User model
+			},
+		],
+	});
 	if (!blog) return next(new AppError("No blog found with that id", 404));
 
 	res.status(200).json({ status: "success", data: blog });

@@ -9,3 +9,14 @@ export const getAllBlog = async () => {
 		return [];
 	}
 };
+
+export const getSingleBlog = async (blogId) => {
+	try {
+		const singleBlog = await fetchData("GET", null, `blogs/${blogId}`);
+		console.log(singleBlog);
+		return singleBlog;
+	} catch (error) {
+		console.error("Failed to retrieve single blog list.", error);
+		return [];
+	}
+};

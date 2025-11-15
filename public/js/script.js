@@ -1,4 +1,4 @@
-import { getAllBlog } from "./api/blogServices.js";
+import { getAllBlog, getSingleBlog } from "./api/blogServices.js";
 import { signupUser, loginUser } from "./api/userSevices.js"; // <-- ASSUME loginUser is added here
 import { displayMessage } from "./displayMessage.js";
 import { formatDate } from "./utility/formatDate.js";
@@ -129,27 +129,59 @@ const initLoginForm = () => {
 	form.addEventListener("submit", handleLoginSubmit);
 };
 
-// ----------- NAVIGATION UI, LOGOUT, AND MESSAGE DISPLAY (remain the same) -----------
+// Function to generate the 'My Blog' link HTML
+const navUserBlogs = () =>
+	`<a href='./user-blogs.html' class='nav-main-link' id='nav-myblog'>
+        My Blog
+    </a>`;
+
+// Function to insert the 'My Blog' link into the middle-nav
+const middleNav = (isLoggedIn) => {
+	const middleNavContainer = getEl(".middle-nav");
+	if (!middleNavContainer) return;
+
+	const myBlogLink = getElById("nav-myblog");
+
+	if (isLoggedIn && !myBlogLink) {
+		// If logged in AND the link doesn't exist, append it.
+		middleNavContainer.innerHTML += navUserBlogs();
+	} else if (!isLoggedIn && myBlogLink) {
+		// If logged out AND the link exists, remove it.
+		myBlogLink.remove();
+	}
+};
+
+// ----------- NAVIGATION UI, LOGOUT, AND MESSAGE DISPLAY (MODIFIED) -----------
 const createLoggedInNav = (userName) => `
+    
     <span class="nav-username">Hello, ${userName}</span>
     <a href="#" id="nav-logout">Logout</a>
 `;
 
 const createLoggedOutNav = () => `
-    <a href="./html/login.html" id="nav-login">Login</a>
-    <a href="./html/register.html" id="nav-register">Register</a>
+    <a href="./login.html" id="nav-login">Login</a>
+    <a href="./register.html" id="nav-register">Register</a>
 `;
 
 const updateNavForUser = (userName) => {
 	const nav = getElById("nav-user-status");
+	const isLoggedIn = !!userName; // Convert userName (string or null) to boolean
+
 	if (!nav) return;
 
-	nav.innerHTML = userName ? createLoggedInNav(userName) : createLoggedOutNav();
+	// 1. Update the user status section (Login/Register or User/Logout)
+	nav.innerHTML = isLoggedIn ? createLoggedInNav(userName) : createLoggedOutNav();
 
-	if (userName) {
+	// 2. Control the 'My Blog' link visibility based on login status
+	middleNav(isLoggedIn);
+
+	// 3. Attach logout listener if logged in
+	if (isLoggedIn) {
 		getElById("nav-logout")?.addEventListener("click", handleLogout);
 	}
 };
+
+// ... (Rest of your script.js remains the same)
 
 const handleLogout = (event) => {
 	event.preventDefault();
@@ -173,6 +205,25 @@ const displayStoredMessage = () => {
 	localStorage.removeItem("loginMessage");
 };
 
+// --- DYNAMIC BLOG RENDERING ---
+const renderBlogDetails = async () => {
+	const params = new URLSearchParams(window.location.search);
+	const blogId = params.get("id");
+	if (!blogId) return;
+
+	try {
+		const { data: blog } = await getSingleBlog(blogId);
+		getElById("postTitle").textContent = blog.title;
+		getElById("postCategory").textContent = blog.category;
+		getElById("postMeta").textContent = `By ${blog.author.name} • ${formatDate(blog.createdAt)}`;
+		getElById("postImage").src = blog.imageUrl || "https://via.placeholder.com/800x400";
+		getElById("postContent").innerHTML = blog.content;
+	} catch (error) {
+		console.error("Error loading blog:", error);
+		getElById("postContent").innerHTML = "<p>Sorry, this blog post could not be loaded.</p>";
+	}
+};
+
 // ----------- APP INITIALIZATION -----------
 
 const initializeApp = () => {
@@ -180,14 +231,14 @@ const initializeApp = () => {
 
 	const user = localStorage.getItem("userName");
 
-	// Initialize all features regardless of which page the script runs on
 	renderBlogs();
 	updateNavForUser(user);
 	displayStoredMessage();
 
 	// Check for forms and initialize listeners
 	initSignupForm();
-	initLoginForm(); // <-- NEW: Initialize the login form listener
+	initLoginForm();
+	renderBlogDetails();
 };
 
 document.addEventListener("DOMContentLoaded", initializeApp);

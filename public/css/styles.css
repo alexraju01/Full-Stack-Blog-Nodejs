@@ -10,13 +10,18 @@
 /* --- Base Styles --- */
 * {
 	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 body {
 	font-family: "Inter", sans-serif;
 	background-color: var(--bg-light);
 	color: var(--text-primary);
-	margin: 0;
 	line-height: 1.5;
+	min-height: 100vh; /* Viewport Height */
+	display: flex;
+	flex-direction: column;
+	margin: 0;
 }
 
 h1,
@@ -209,6 +214,10 @@ input:focus {
 .card-excerpt {
 	color: var(--text-secondary);
 	font-size: 0.875rem;
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
 }
 .card-meta {
 	color: var(--text-meta);
@@ -262,12 +271,18 @@ input:focus {
 	margin-bottom: 1rem;
 }
 
+main {
+	flex-grow: 1;
+}
+
 /* --- Footer --- */
 .main-footer {
 	padding-top: 2rem;
 	padding-bottom: 2rem;
 	background-color: #fff;
 	border-top: 1px solid #f3f4f6;
+	/* Optional: Prevents the footer from shrinking */
+	flex-shrink: 0;
 }
 
 .footer-content {

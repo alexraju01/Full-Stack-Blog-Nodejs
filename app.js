@@ -13,6 +13,7 @@ const globalErrorHandler = require("./controllers/errorController");
 app.use(express.json());
 app.use(cors());
 app.use(express.static("public"));
+app.use(express.static("public/html"));
 
 // Development Logging
 if (process.env.NODE_ENV === "development") {
