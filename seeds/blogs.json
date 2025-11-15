@@ -3,7 +3,7 @@
 		"slug": "getting-started-with-node-js",
 		"title": "A Beginner's Guide to Node.js Development",
 		"content": "Node.js is a powerful JavaScript runtime built on Chrome's V8 engine that allows you to execute JavaScript code server-side, enabling full-stack development with a single language. This post covers the absolute basics of setting up your very first project, including installing Node.js, initializing a project with npm, and creating a simple 'Hello World' server.\n\nWe'll explore fundamental concepts like the event loop and non-blocking I/O operations, which are key to Node.js's high-performance architecture. Understanding these basics is crucial for building scalable and fast backend applications. Follow this guide to get your development environment ready and start building APIs and web services.",
-		"imageUrl": "https://images.unsplash.com/photo-1550005805-d1b4637996a6?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+		"imageUrl": "https://images.unsplash.com/photo-1627398242454-45a1465c2479?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 		"category": "Technology",
 		"tags": ["nodejs", "javascript", "backend"],
 		"userId": 1
@@ -12,7 +12,7 @@
 		"slug": "mastering-sequelize-migrations",
 		"title": "Mastering Sequelize Migrations for Database Schema Changes",
 		"content": "Migrations are essential for evolving your database schema safely in production environments without losing data or causing downtime. Sequelize, a powerful Node.js ORM, uses a structured, file-based approach for handling these changes, allowing teams to manage schema versions systematically and collaboratively.\n\nThis guide details how to generate, write, and execute migration files for common tasks like adding new columns, creating indexes, or altering tables. We'll also cover best practices for rollback procedures and how to seamlessly integrate migrations into your continuous deployment pipeline for robust database management.",
-		"imageUrl": "https://images.unsplash.com/photo-1616400619175-5be326ad2876?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+		"imageUrl": "https://images.unsplash.com/photo-1627398242454-45a1465c2479?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 		"category": "Database",
 		"tags": ["sequelize", "orm", "database"],
 		"userId": 1

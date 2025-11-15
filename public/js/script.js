@@ -1,4 +1,4 @@
-import { getAllBlog, getSingleBlog } from "./api/blogServices.js";
+import { getAllBlog, getSingleBlog, getUserBlogs } from "./api/blogServices.js";
 import { signupUser, loginUser } from "./api/userSevices.js"; // <-- ASSUME loginUser is added here
 import { displayMessage } from "./displayMessage.js";
 import { formatDate } from "./utility/formatDate.js";
@@ -13,8 +13,6 @@ const renderBlogs = async () => {
 	const { data: blogs } = await getAllBlog();
 	renderBlogsToHTML(blogs);
 };
-
-// ... (createPostHTML and renderBlogsToHTML remain the same) ...
 
 const createPostHTML = (blog) => {
 	const formattedDate = formatDate(blog.createdAt);
@@ -46,12 +44,13 @@ const renderBlogsToHTML = (blogs) => {
 };
 
 // --- USER AUTH UTILITIES ---
-
 const extractUserData = (formData) => Object.fromEntries(formData.entries());
 
-const storeUserSession = (userName, isLogin = false) => {
+const storeUserSession = (userName, token, isLogin = false) => {
+	console.log(token);
 	localStorage.setItem("userName", userName);
-	// Adjust message based on whether it's a new sign-up or a log-in
+	localStorage.setItem("token", token);
+
 	const message = isLogin
 		? `Welcome back, ${userName}!`
 		: `Registration successful! Welcome, ${userName}.`;
@@ -61,11 +60,10 @@ const storeUserSession = (userName, isLogin = false) => {
 
 const clearUserSession = () => {
 	localStorage.removeItem("userName");
-	localStorage.removeItem("userId");
+	localStorage.removeItem("token");
 };
 
 // --- SIGNUP LOGIC ---
-
 const handleSignUpSubmit = async (event) => {
 	event.preventDefault();
 
@@ -83,9 +81,11 @@ const handleSignUpSubmit = async (event) => {
 			confirmPassword,
 		});
 
-		const userName = response?.data?.user?.name || name;
+		console.log(response?.data);
+		const token = response?.data?.user?.token;
+		const userName = response?.data?.user?.name;
 
-		storeUserSession(userName, false); // Sign-up (isLogin=false)
+		storeUserSession(userName, token, false);
 		window.location.href = "/"; // redirect
 	} catch (error) {
 		const feedback = error.message || "An unexpected error occurred. Please try again.";
@@ -99,8 +99,7 @@ const initSignupForm = () => {
 	form.addEventListener("submit", handleSignUpSubmit);
 };
 
-// --- NEW LOGIN LOGIC ---
-
+// --- LOGIN LOGIC ---
 const handleLoginSubmit = async (event) => {
 	event.preventDefault();
 
@@ -113,8 +112,9 @@ const handleLoginSubmit = async (event) => {
 	try {
 		const response = await loginUser({ email, password });
 		const userName = response?.name || "User";
+		const token = response?.token;
 
-		storeUserSession(userName, true);
+		storeUserSession(userName, token, true);
 		window.location.href = "/";
 	} catch (error) {
 		console.error("Login Error:", error);
@@ -129,13 +129,11 @@ const initLoginForm = () => {
 	form.addEventListener("submit", handleLoginSubmit);
 };
 
-// Function to generate the 'My Blog' link HTML
 const navUserBlogs = () =>
 	`<a href='./user-blogs.html' class='nav-main-link' id='nav-myblog'>
         My Blog
     </a>`;
 
-// Function to insert the 'My Blog' link into the middle-nav
 const middleNav = (isLoggedIn) => {
 	const middleNavContainer = getEl(".middle-nav");
 	if (!middleNavContainer) return;
@@ -143,10 +141,8 @@ const middleNav = (isLoggedIn) => {
 	const myBlogLink = getElById("nav-myblog");
 
 	if (isLoggedIn && !myBlogLink) {
-		// If logged in AND the link doesn't exist, append it.
 		middleNavContainer.innerHTML += navUserBlogs();
 	} else if (!isLoggedIn && myBlogLink) {
-		// If logged out AND the link exists, remove it.
 		myBlogLink.remove();
 	}
 };
@@ -165,23 +161,18 @@ const createLoggedOutNav = () => `
 
 const updateNavForUser = (userName) => {
 	const nav = getElById("nav-user-status");
-	const isLoggedIn = !!userName; // Convert userName (string or null) to boolean
+	const isLoggedIn = !!userName;
 
 	if (!nav) return;
 
-	// 1. Update the user status section (Login/Register or User/Logout)
 	nav.innerHTML = isLoggedIn ? createLoggedInNav(userName) : createLoggedOutNav();
 
-	// 2. Control the 'My Blog' link visibility based on login status
 	middleNav(isLoggedIn);
 
-	// 3. Attach logout listener if logged in
 	if (isLoggedIn) {
 		getElById("nav-logout")?.addEventListener("click", handleLogout);
 	}
 };
-
-// ... (Rest of your script.js remains the same)
 
 const handleLogout = (event) => {
 	event.preventDefault();
@@ -224,6 +215,50 @@ const renderBlogDetails = async () => {
 	}
 };
 
+const renderUserBlogs = async () => {
+	const userPostsContainer = getElById("userPostsContainer");
+	if (!userPostsContainer) return;
+
+	const renderUserBlogsToHTML = (blogs) => {
+		const blogsHTML = blogs.map(createPostHTML).join("");
+
+		userPostsContainer.innerHTML = blogsHTML;
+		const cards = userPostsContainer.querySelectorAll(".card");
+
+		cards.forEach((card, index) => {
+			const blog = blogs[index];
+
+			card.addEventListener("click", () => {
+				window.location.href = `./blog-details.html?id=${blog.id}`;
+			});
+		});
+	};
+
+	const token = localStorage.getItem("token");
+
+	if (!token) {
+		userPostsContainer.innerHTML =
+			"<p class='error-message'>You must be logged in to view your posts. Please <a href='./login.html'>Login</a>.</p>";
+		return;
+	}
+
+	try {
+		const { data: userBlogs } = await getUserBlogs();
+		console.log("jhdgfhjgdf", userBlogs);
+
+		if (!userBlogs || userBlogs.length === 0) {
+			userPostsContainer.innerHTML =
+				"<p class='loading-message'>You haven't created any posts yet. Click 'Create New Post' to start!</p>";
+		} else {
+			renderUserBlogsToHTML(userBlogs);
+		}
+	} catch (error) {
+		console.error("Error loading user blogs:", error);
+		// Display a general failure message for other errors
+		userPostsContainer.innerHTML =
+			"<p class='error-message'>Failed to load your blog posts. Please try again later.</p>";
+	}
+};
 // ----------- APP INITIALIZATION -----------
 
 const initializeApp = () => {
@@ -235,10 +270,10 @@ const initializeApp = () => {
 	updateNavForUser(user);
 	displayStoredMessage();
 
-	// Check for forms and initialize listeners
 	initSignupForm();
 	initLoginForm();
 	renderBlogDetails();
+	renderUserBlogs();
 };
 
 document.addEventListener("DOMContentLoaded", initializeApp);

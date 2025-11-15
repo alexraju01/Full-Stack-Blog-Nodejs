@@ -1,4 +1,4 @@
-export const fetchData = async (method = "GET", data = null, endpoint = "blogs") => {
+export const fetchData = async (method = "GET", data = null, endpoint = "blogs", token = null) => {
 	const url = `/api/v1/${endpoint}`;
 
 	const config = {
@@ -7,6 +7,12 @@ export const fetchData = async (method = "GET", data = null, endpoint = "blogs")
 			"Content-Type": "application/json",
 		},
 	};
+
+	// --- LOGIC: ADD AUTHORIZATION HEADER ---
+	if (token) {
+		// Attach the token as a Bearer Token
+		config.headers["Authorization"] = `Bearer ${token}`;
+	}
 
 	if (data && ["POST", "PUT", "PATCH"].includes(config.method)) {
 		config.body = JSON.stringify(data);
@@ -26,18 +32,16 @@ export const fetchData = async (method = "GET", data = null, endpoint = "blogs")
 				errorMessage = errorBody.message;
 			}
 
-			// Throw a new Error with the custom message
 			throw new Error(errorMessage);
 		}
 
 		if (response.status === 204) {
 			console.log(`Successfully completed ${method} request to ${url} with 204 No Content.`);
-			return {}; // Return an empty object or true to signal success
+			return {};
 		}
 
 		const data = await response.json();
 		return data;
-		// Use result.data if available, otherwise return the whole result
 	} catch (error) {
 		console.error(`API execution failed for ${config.method} ${url}:`, error);
 		throw error;

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>My Blogs - Modern Blog</title>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap"
+			rel="stylesheet" />
+		<link rel="stylesheet" href="../css/styles.css" />
+	</head>
+	<body>
+		<header class="main-header">
+			<div class="header-content">
+				<h1 class="logo">My Modern Blog</h1>
+
+				<div class="middle-nav">
+					<a href="../index.html" class="nav-main-link">Home</a>
+				</div>
+
+				<div id="nav-user-status">
+					<a href="./login.html" id="nav-login">Login</a>
+					<a href="./register.html" id="nav-register">Register</a>
+				</div>
+			</div>
+		</header>
+
+		<main>
+			<section class="user-blog-section">
+				<div class="max-width-container">
+					<h2 class="user-blog-title">Your Blog Posts</h2>
+					<div class="user-blog-actions">
+						<a href="./create-blog.html" class="btn"> + Create New Post </a>
+					</div>
+
+					<div class="posts-grid user-posts-grid" id="userPostsContainer">
+						<p class="loading-message">Loading your posts...</p>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<footer class="main-footer">
+			<div class="footer-content">
+				<p>© 2025 My Modern Blog. All rights reserved.</p>
+				<div class="social-links">
+					<a href="#">Twitter</a>
+					<a href="#">LinkedIn</a>
+					<a href="#">GitHub</a>
+				</div>
+			</div>
+		</footer>
+
+		<script type="module" src="../js/script.js"></script>
+	</body>
+</html>
