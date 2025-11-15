@@ -281,7 +281,7 @@ main {
 	padding-bottom: 2rem;
 	background-color: #fff;
 	border-top: 1px solid #f3f4f6;
-	/* Optional: Prevents the footer from shrinking */
+
 	flex-shrink: 0;
 }
 
