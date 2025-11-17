@@ -39,3 +39,17 @@ export const getUserBlogs = async () => {
 		throw error;
 	}
 };
+
+export const createBlog = async (blogData) => {
+	const token = localStorage.getItem("token");
+	if (!token) {
+		throw new Error("User not authenticated. Token is missing.");
+	}
+	try {
+		const newBlog = await fetchData("POST", blogData, "blogs", token);
+		return newBlog;
+	} catch (error) {
+		console.error("Failed to create new blog.", error);
+		throw error;
+	}
+};

@@ -1,4 +1,4 @@
-import { getAllBlog, getSingleBlog, getUserBlogs } from "./api/blogServices.js";
+import { createBlog, getAllBlog, getSingleBlog, getUserBlogs } from "./api/blogServices.js";
 import { signupUser, loginUser } from "./api/userSevices.js"; // <-- ASSUME loginUser is added here
 import { displayMessage } from "./displayMessage.js";
 import { formatDate } from "./utility/formatDate.js";
@@ -47,7 +47,6 @@ const renderBlogsToHTML = (blogs) => {
 const extractUserData = (formData) => Object.fromEntries(formData.entries());
 
 const storeUserSession = (userName, token, isLogin = false) => {
-	console.log(token);
 	localStorage.setItem("userName", userName);
 	localStorage.setItem("token", token);
 
@@ -81,7 +80,6 @@ const handleSignUpSubmit = async (event) => {
 			confirmPassword,
 		});
 
-		console.log(response?.data);
 		const token = response?.data?.user?.token;
 		const userName = response?.data?.user?.name;
 
@@ -129,21 +127,25 @@ const initLoginForm = () => {
 	form.addEventListener("submit", handleLoginSubmit);
 };
 
-const navUserBlogs = () =>
-	`<a href='./user-blogs.html' class='nav-main-link' id='nav-myblog'>
+const navUserBlogs = () => `<a href='./user-blogs.html' class='nav-main-link' id='nav-myblog'>
         My Blog
-    </a>`;
+    </a>
+  `;
 
 const middleNav = (isLoggedIn) => {
 	const middleNavContainer = getEl(".middle-nav");
 	if (!middleNavContainer) return;
 
 	const myBlogLink = getElById("nav-myblog");
+	const createPostLink = getElById("nav-create-post");
 
-	if (isLoggedIn && !myBlogLink) {
-		middleNavContainer.innerHTML += navUserBlogs();
-	} else if (!isLoggedIn && myBlogLink) {
-		myBlogLink.remove();
+	if (isLoggedIn) {
+		if (!myBlogLink) {
+			middleNavContainer.innerHTML += navUserBlogs();
+		}
+	} else if (!isLoggedIn && (myBlogLink || createPostLink)) {
+		myBlogLink?.remove();
+		createPostLink?.remove();
 	}
 };
 
@@ -244,7 +246,6 @@ const renderUserBlogs = async () => {
 
 	try {
 		const { data: userBlogs } = await getUserBlogs();
-		console.log("jhdgfhjgdf", userBlogs);
 
 		if (!userBlogs || userBlogs.length === 0) {
 			userPostsContainer.innerHTML =
@@ -259,8 +260,51 @@ const renderUserBlogs = async () => {
 			"<p class='error-message'>Failed to load your blog posts. Please try again later.</p>";
 	}
 };
-// ----------- APP INITIALIZATION -----------
 
+// Handle Create Blog Submission
+const handleCreateBlogSubmit = async (event) => {
+	event.preventDefault();
+
+	const form = event.target;
+	const data = extractUserData(new FormData(form));
+
+	const { title, category, imageUrl, content } = data;
+
+	const slug = title
+		.toLowerCase()
+		.trim()
+		.replace(/[^\w\s-]/g, "") // Remove all non-word characters (except spaces and hyphens)
+		.replace(/[\s_-]+/g, "-") // Replace spaces, underscores, and multiple hyphens with a single hyphen
+		.replace(/^-+|-+$/g, ""); // Remove leading or trailing hyphens
+
+	displayMessage(form, "", "");
+	try {
+		const response = await createBlog({
+			title,
+			category,
+			imageUrl,
+			content,
+			slug,
+		});
+
+		localStorage.setItem("loginMessage", "New post published successfully!");
+
+		window.location.href = "./user-blogs.html";
+	} catch (error) {
+		console.error("Create Blog Error:", error);
+		const feedback = error.message || "Failed to create post. Check your connection or try again.";
+		displayMessage(form, feedback, "error");
+	}
+};
+
+const initCreateBlogForm = () => {
+	const form = getElById("create-blog-form");
+	if (!form) return;
+
+	form.addEventListener("submit", handleCreateBlogSubmit);
+};
+
+// --- APP INITIALIZATION ---
 const initializeApp = () => {
 	console.log("App initialized");
 
@@ -272,6 +316,7 @@ const initializeApp = () => {
 
 	initSignupForm();
 	initLoginForm();
+	initCreateBlogForm();
 	renderBlogDetails();
 	renderUserBlogs();
 };

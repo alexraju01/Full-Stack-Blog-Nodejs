@@ -28,6 +28,10 @@ exports.createBlog = async (req, res) => {
 	const blogData = req.body;
 	blogData.userId = req.user.id;
 
+	if (blogData.imageUrl?.trim() === "") {
+		blogData.imageUrl = null;
+	}
+
 	const newBlog = await Blog.create(blogData);
 
 	res.status(201).json({

@@ -62,13 +62,14 @@ const Blog = sequelize.define("Blog", {
 	},
 
 	imageUrl: {
-		type: DataTypes.STRING,
+		type: DataTypes.TEXT,
 		allowNull: true, // optional, in case it's a text-only blog
 		validate: {
 			isUrl: {
 				msg: "Image URL must be a valid URL.",
 			},
 		},
+		defaultValue: null,
 	},
 
 	category: {

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Create New Blog Post | My Modern Blog</title>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap"
+			rel="stylesheet" />
+		<link rel="stylesheet" href="../css/styles.css" />
+	</head>
+	<body>
+		<header class="main-header">
+			<div class="header-content">
+				<h1 class="logo">My Modern Blog</h1>
+
+				<div class="middle-nav">
+					<a href="../index.html" class="nav-main-link">Home</a>
+				</div>
+
+				<div id="nav-user-status">
+					<a href="./login.html" id="nav-login">Login</a>
+					<a href="./register.html" id="nav-register">Register</a>
+				</div>
+			</div>
+		</header>
+
+		<main class="user-blog-section">
+			<div class="max-width-container">
+				<h2 class="user-blog-title">Create a New Post</h2>
+
+				<div class="form-container">
+					<form id="create-blog-form" class="register-form">
+						<div id="form-message"></div>
+
+						<div class="form-group">
+							<label for="title">Title</label>
+							<input type="text" id="title" name="title" required minlength="5" />
+						</div>
+
+						<div class="form-group">
+							<label for="category">Category</label>
+							<input type="text" id="category" name="category" required />
+						</div>
+
+						<div class="form-group">
+							<label for="imageUrl">Image URL (Optional)</label>
+							<input
+								type="text"
+								id="imageUrl"
+								name="imageUrl"
+								placeholder="e.g., https://via.placeholder.com/800x400" />
+						</div>
+
+						<div class="form-group">
+							<label for="content">Content</label>
+							<textarea id="content" name="content" rows="10" required minlength="50"></textarea>
+						</div>
+
+						<button type="submit" class="btn">Publish Post</button>
+					</form>
+				</div>
+			</div>
+		</main>
+
+		<footer class="main-footer">
+			<div class="footer-content">
+				<p>© 2025 My Modern Blog. All rights reserved.</p>
+				<div class="social-links">
+					<a href="#">Twitter</a>
+					<a href="#">LinkedIn</a>
+					<a href="#">GitHub</a>
+				</div>
+			</div>
+		</footer>
+
+		<script type="module" src="../js/script.js"></script>
+	</body>
+</html>
