@@ -79,8 +79,10 @@ const handleSignUpSubmit = async (event) => {
 			password,
 			confirmPassword,
 		});
+		console.log("Signup Response::::::::::::::");
+		const token = response?.token;
+		console.log("Signup Response:", response);
 
-		const token = response?.data?.user?.token;
 		const userName = response?.data?.user?.name;
 
 		storeUserSession(userName, token, false);
